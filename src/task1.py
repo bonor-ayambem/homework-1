@@ -50,6 +50,10 @@ sharpen = np.array((
 [-1, 5, -1],
 [0, -1, 0]), dtype="int")
 
+# sharpen = np.array((
+# [1, 2, 1],
+# [2, 4, 2],
+# [1, 2, 1]), dtype="int")
 
 # construct average blurring kernels used to smooth an image
 smallBlur = np.ones((3, 3), dtype="float") * (1.0 / (3 * 3))
@@ -74,7 +78,8 @@ for idx, filename in enumerate(os.listdir('data/task1')):
 
 	cv2.imshow("original", img)
 	cv2.imshow("{} - convole".format('final'), convolveOutput)
-	cv2.imwrite('output/task1/{idx}.jpg', convolveOutput)
+	fn = 'output/task1/' + str(idx+1) + '.jpg'
+	cv2.imwrite(fn, convolveOutput)
 
 	# print(f"Number of channels after convolution: {convolveOutputRGB.shape[2] if len(convolveOutputRGB.shape) == 3 else 1}")
 
