@@ -108,9 +108,16 @@ The following times were taken for convolution to be performed using different k
 | 5x5 | 41.94101977 |
 | 7x7 | 25.81305599 |
 
-![Local Image](images/performance_graph.jpg)
+![Local Image](images/performance_graph.png)
 
+The smallest kernel size demonstrated the fastest convolution time, taking approximately 21.94 seconds. 
+This result aligns with the expectation that smaller kernel sizes generally lead to quicker computations.
 
+With an increase in kernel size to 5x5, the time taken for convolution notably increased to 41.94 seconds.
+
+The 7x7 kernel showed a reduction in processing time compared to the 5x5 kernel, taking approximately 25.81 
+seconds. One potential explanation could be related to the coverage of more ground at once with the use of 
+a larger kernel. 
 
 
 ## References
