@@ -55,10 +55,6 @@ if __name__ == "__main__":
         [1/8, 1/4, 1/8],
         [1/16, 1/8, 1/16]), dtype="float32")
 
-	# construct average blurring kernels used to smooth an image
-	smallBlur = np.ones((3, 3), dtype="float") * (1.0 / (3 * 3))
-	largeBlur = np.ones((21, 21), dtype="float") * (1.0 / (21 * 21))
-
 	for idx, filename in enumerate(os.listdir('data/task1')):
 		filepath = os.path.join(directory, filename)
 		img = cv2.imread(filepath)
@@ -70,21 +66,16 @@ if __name__ == "__main__":
 
 		convolveOutput = convolve(img, gaussian)
 		cv2.imshow('convolve output', convolveOutput)
-		print(convolveOutput.shape)
-		# convolveOutputRGB = cv2.cvtColor(convolveOutput, cv2.COLOR_GRAY2BGR)
 
 		di = img - convolveOutput
 		cv2.imshow("di", di)
 		print(di.shape)
 
 		final = img + di
-		# cv2.imshow("{} - convole".format('final'), final)
 
 		cv2.imshow("final", convolveOutput)
 		fn = 'output/task1/' + str(idx+1) + '.jpg'
 		cv2.imwrite(fn, convolveOutput)
-
-		# print(f"Number of channels after convolution: {convolveOutputRGB.shape[2] if len(convolveOutputRGB.shape) == 3 else 1}")
 
 		cv2.waitKey(0)
 		cv2.destroyAllWindows()
