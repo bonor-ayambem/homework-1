@@ -78,22 +78,29 @@ def median_filter(image):
 
 if __name__ == "__main__":
 	directory = 'data/task2'
+	i = 1
+	j = 1
 	
-	for idx, filename in enumerate(os.listdir('data/task2')):
+	for filename in os.listdir('data/task2'):
 		filepath = os.path.join(directory, filename)
 		img = cv2.imread(filepath)
 		if img is None:
 			print(f"Error reading image: {filepath}")
 			continue  # Skip to the next iteration
+		
 		if 'gb' in filename:
 			smooth_image = gaussian_smoothing(img)
+			fn = 'output/task2/gb' + str(i) + '.jpg'
+			cv2.imwrite(fn, smooth_image)
+			i = i + 1
 		elif 'sp' in filename:
 			smooth_image = median_filter(img)
+			fn = 'output/task2/sp' + str(j) + '.jpg'
+			cv2.imwrite(fn, smooth_image)
+			j = j + 1
 
 		cv2.imshow("original", img)
 		cv2.imshow("{} - smooth".format('final'), smooth_image)
-		# fn = 'output/task1/' + str(idx+1) + '.jpg'
-		# cv2.imwrite(fn, convolveOutput)
 
 		cv2.waitKey(0)
 		cv2.destroyAllWindows()

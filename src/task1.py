@@ -62,21 +62,25 @@ if __name__ == "__main__":
 	for idx, filename in enumerate(os.listdir('data/task1')):
 		filepath = os.path.join(directory, filename)
 		img = cv2.imread(filepath)
-		
+		if img is None:
+			print(f"Error reading image: {filepath}")
+			continue  # Skip to the next iteration
+		else:
+			cv2.imshow("original", img)
+
 		convolveOutput = convolve(img, gaussian)
-		cv2.imshow("{} - convole".format('convolve output'), convolveOutput)
+		cv2.imshow('convolve output', convolveOutput)
 		print(convolveOutput.shape)
 		# convolveOutputRGB = cv2.cvtColor(convolveOutput, cv2.COLOR_GRAY2BGR)
 
 		di = img - convolveOutput
-		cv2.imshow("{} - convole".format('di'), di)
+		cv2.imshow("di", di)
 		print(di.shape)
 
 		final = img + di
 		# cv2.imshow("{} - convole".format('final'), final)
 
-		cv2.imshow("original", img)
-		cv2.imshow("{} - convole".format('final'), convolveOutput)
+		cv2.imshow("final", convolveOutput)
 		fn = 'output/task1/' + str(idx+1) + '.jpg'
 		cv2.imwrite(fn, convolveOutput)
 
