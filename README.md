@@ -45,9 +45,61 @@ however, the following changes were made:
 
 ### Task 2 - Image Denoising
 
+Denoising is the process of removing or reducing unwanted variations in brightness or color that distort the 
+visual appearance of an image, otherwise known as noise. 
 
+Task 2 implements three different denoising methods, namely: mean filtering `mean_filter(image)`, gaussian 
+smoothing `gaussian_smoothing(image)`, and median filtering `median_filtering(image)`.
+
+All three functions utilize the same convolution process from Task 1 with the following modifications:
+
+- `mean_filter()` uses the kernel
+  ```
+  kernel = np.array((
+        [1/9, 1/9, 1/9],
+        [1/9, 1/9, 1/9],
+        [1/9, 1/9, 1/9]), dtype="float32")
+  ```
+- `gaussian_smoothing()` uses the kernel
+  ```
+  kernel = np.array((
+        [1/16, 1/8, 1/16],
+        [1/8, 1/4, 1/8],
+        [1/16, 1/8, 1/16]), dtype="float32")
+  ```
+- `median_filter()` does not use any kernel, but rather assigns to the necessary output the median of the region of interest
+  ```
+  k = np.median(roi)
+  output[y - pad, x - pad, z] = k	
+  ```
+
+For the images `gb_image1.jpg` and `gb_image2.jpg`, gaussian_smoothing() works best because Gaussian smoothing
+is effective in reducing high-frequency noise in images, which both images contain. High-frequency noise often 
+appears as random variations in pixel intensity, and the Gaussian filter, by design, attenuates high-frequency 
+components.
+
+For the images `sp_image1.jpg` and `sp_image2.jpg`, median_filter() works best because the median filter is a 
+non-linear filter, meaning that the output pixel value is not a linear combination of the input pixel values. 
+In the case of salt and pepper noise, where isolated pixels have extreme values, a non-linear filter like the 
+median filter works best.
 
 ## 498 Graduate Level Additional Questions
+### Task 1 - Image Sharpening
+The following filter can sharpen the images in one step:
+```
+ sharpen = np.array((
+ [0, -1, 0],
+ [-1, 5, -1],
+ [0, -1, 0]), dtype="int")
+```
+It works by emphasizing the intensity differences between the central pixel and its neighbors. The central 
+pixel is multiplied by a large positive weight (5), enhancing its contribution to the output.
+
+The surrounding pixels are multiplied by negative weights, reducing their contribution to the output. The 
+overall result is that edges and fine details in the image are enhanced, leading to a sharpened appearance.
+
+### Task 2 - Image Denoising
+
 
 ## References
 - [Convolutions with OpenCV and Python] (https://pyimagesearch.com/2016/07/25/convolutions-with-opencv-and-python/)
