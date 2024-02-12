@@ -10,6 +10,7 @@ purpose of understanding the different techniques that are involved in carrying 
 
 ## Implementation
 ### Task 1 - Image Sharpening
+
 Task 1 develops a program to perform _unsharp masking_ on input images, in order to enhance their major
 edges.
 
@@ -41,6 +42,9 @@ however, the following changes were made:
 
 - To allow the function to process color images, the convolution process takes place in all 3 dimensions. This was not previously the case, and resulted in the function producing only greyscale images
 - After much experimentation and difficulties, a kernel was found which worked well for this task. This kernel is different from any of those used in the original `convolve()` function
+
+### Task 2 - Image Denoising
+
 
 
 ## 498 Graduate Level Additional Questions
