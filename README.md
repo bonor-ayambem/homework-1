@@ -100,6 +100,18 @@ overall result is that edges and fine details in the image are enhanced, leading
 
 ### Task 2 - Image Denoising
 
+The following times were taken for convolution to be performed using different kernel sizes
+
+| Kernel Size | Time taken for Convolution (s) |
+|----------|----------|
+| 3x3 | 21.93853378 |
+| 5x5 | 41.94101977 |
+| 7x7 | 25.81305599 |
+
+![Local Image](images/performance_graph.jpg)
+
+
+
 
 ## References
 - [Convolutions with OpenCV and Python] (https://pyimagesearch.com/2016/07/25/convolutions-with-opencv-and-python/)
